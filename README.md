@@ -1,15 +1,15 @@
-# Project_Portofolio
+# DESKRIPSI PROJECT
+SPK adalah Sistem Pengambilan Keputusan yang dimana kasus pengambilan keputusan yang diambil dikasus ini adalah Pemilihan tempat les. Untuk metode yang digunakan pada kasus ini adalah metode <b>Weighted product</b>.
+Bahasa pemrograman yang dipakai adalah PHP. Untuk tampilannya menggunakan Framework <b>Bulma</b>.
 
-Repository portfolio yang berisi kumpulan project website berbasis PHP, MySQL, Bootstrap, dan JavaScript dengan fokus pada pengembangan backend, frontend, UI responsif, dan implementasi fitur interaktif berbasis web.
+# TUJUAN
+Tujuan pembuatan project SPK ini adalah untuk memenuhi nilai UTS dari matakuliah SPK (Sistem Pengambilan Keputusan).
 
-## 📌 Daftar Project
-- Website Sistem Pendukung Keputusan Laptopku
-- Website Ruang Motivasi
-- Website Pendaftaran Pasien Rumah Sakit Sehat Banget
+# INSTALASI
+Jalanin XAMPP, terus buka localhost -> phpmyadmin. Kalo udah, buat db dengan nama belajar. Kalo udah buat, langsung klik import pilih file yang ada didalem folder database.
 
-## 🛠️ Teknologi
-- PHP
-- MySQL
-- Bootstrap
-- JavaScript
-- HTML & CSS
+# BACA INI
+Sebelum download, pastikan kalian mempunyai :
+* Code Editor (Boleh VS Code, Sublime, Notepad++ dsb).
+* XAMPP (Ini butuh banget, untuk import database).
+* Kalo udah ada 2 poin diatas, langsung download aja projectnya <b>GRATIS</b>.
