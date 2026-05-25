@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruang Motivasi - Bagikan Inspirasi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+            /* 1. Aturan Dasar (Letakkan di sini agar terbaca di laptop/komputer) */
+            .timeline-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+              gap: 25px;
+            }
+            /* 2. Aturan Khusus untuk HP (Letakkan di bawah aturan dasar) */
+            @media (max-width: 576px) {
+              .timeline-grid {
+                grid-template-columns: 1fr !important;
+              }
+              .container {
+                padding-left: 10px;
+                padding-right: 10px;
+              }
+              .glass-card {
+                padding: 15px;
+              }
+            }
+            /* --- Tema Energetic & Bold (Final Version) --- */
+
+            :root {
+              --bg-color: #f0f2f5;
+              --glass-bg: rgba(255, 255, 255, 0.7);
+              --primary-color: #1a2a6c; /* Biru Tua Elegan */
+              --accent-color: #b21f1f; /* Merah Api (Energetic) */
+              --text-color: #333;
+            }
+
+            body {
+              body {
+          background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 100%);
+          background-attachment: fixed;
+          font-family: "Poppins", sans-serif;
+          color: var(--text-color);
+          min-height: 100vh;
+          margin: 0;
+          padding: 0;
+          padding-bottom: 50px;
+      }
+
+            /* Navbar */
+            .navbar {
+              background: rgba(255, 255, 255, 0.9) !important;
+              backdrop-filter: blur(10px);
+              border-radius: 50px;
+              margin: 20px auto;
+              width: 95%;
+              border: 2px solid var(--primary-color);
+              box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            /* Kotak Motivasi */
+            .glass-card {
+              background: var(--glass-bg);
+              backdrop-filter: blur(15px);
+              border: 1px solid rgba(255, 255, 255, 0.5);
+              border-radius: 25px;
+              padding: 30px;
+              margin: 20px 15px; /* Memberi jarak agar tidak menempel ke pinggir HP */
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+              transition: all 0.4s ease;
+            }
+
+            .glass-card:hover {
+              transform: translateY(-8px);
+              border-color: var(--primary-color);
+              box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Tombol-Tombol */
+            .btn-gradient {
+              background: var(--primary-color);
+              border: none;
+              border-radius: 50px;
+              color: white;
+              padding: 12px 25px;
+              transition: all 0.3s ease;
+            }
+
+            .btn-gradient:hover {
+              background: var(--accent-color);
+              transform: scale(1.05);
+            }
+
+            .btn-success-custom {
+              background: #ffffff;
+              border: 2px solid var(--primary-color);
+              border-radius: 50px;
+              color: var(--primary-color);
+              padding: 12px 20px;
+              font-weight: 600;
+              transition: 0.3s;
+            }
+
+            .btn-success-custom:hover {
+              background: var(--primary-color);
+              color: white;
+            }
+
+            .btn-logout {
+              background: transparent;
+              border: 1px solid #dc3545;
+              border-radius: 50px;
+              color: #dc3545;
+              padding: 10px 20px;
+              width: 100%;
+              margin-top: 10px;
+              transition: 0.3s;
+            }
+
+            .btn-logout:hover {
+              background: #dc3545;
+              color: white;
+            }
+
+            /* Penyesuaian khusus untuk HP agar tidak berantakan */
+            @media (max-width: 600px) {
+              .glass-card {
+                margin: 15px 10px;
+                padding: 20px;
+              }
+              .navbar {
+                width: 90%;
+              }
+            }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-dark" href="#"> <i class="fa-solid fa-leaf me-2 text-success"></i>RUANG MOTIVASI </a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4" id="sidebar">
+          <div id="authBox" class="card glass-card">
+            <h5 class="fw-bold mb-3"><i class="fa-solid fa-sign-in-alt me-2"></i>Masuk</h5>
+            <input type="email" id="loginEmail" class="form-control mb-2" placeholder="Email" />
+            <input type="password" id="loginPassword" class="form-control mb-3" placeholder="Password" />
+            <button onclick="prosesLogin()" class="btn btn-gradient w-100">Login Sekarang</button>
+            <hr class="my-4" />
+            <h5 class="fw-bold mb-3"><i class="fa-solid fa-user-plus me-2"></i>Daftar</h5>
+            <input type="text" id="regNama" class="form-control mb-2" placeholder="Nama Lengkap" />
+            <input type="email" id="regEmail" class="form-control mb-2" placeholder="Email" />
+            <input type="password" id="regPassword" class="form-control mb-3" placeholder="Password" />
+            <button onclick="prosesRegister()" class="btn btn-success-custom w-100">Buat Akun</button>
+          </div>
+          <div id="postBox" class="card glass-card d-none">
+            <h5 class="fw-bold mb-3"><i class="fa-solid fa-feather-pointed me-2"></i>Tulis Inspirasi</h5>
+            <textarea id="isiMotivasi" class="form-control mb-3" rows="4" placeholder="Apa kata bijakmu hari ini?"></textarea>
+            <button onclick="prosesKirimMotivasi()" class="btn btn-gradient w-100">Publish Motivasi</button>
+            <button onclick="prosesLogout()" class="btn btn-logout">Logout</button>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <h4 class="fw-bold text-dark mb-4">Inspirasi Hari Ini</h4>
+          <div id="timelineContainer" class="timeline-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const BASE_URL = "http://localhost:8080/RuangMotivasi/";
+      let sessionUser = { iduser: null };
+
+      function loadTimeline() {
+        const container = document.getElementById("timelineContainer");
+
+        // Tampilkan pesan loading agar tahu fungsi ini berjalan
+        container.innerHTML = "<p>Memuat data...</p>";
+
+        fetch(BASE_URL + "motivasi_get.php")
+          .then((r) => r.json())
+          .then((res) => {
+            container.innerHTML = ""; // Bersihkan loading
+
+            if (!res.data || res.data.length === 0) {
+              container.innerHTML = "<p>Belum ada motivasi.</p>";
+              return;
+            }
+
+            res.data.forEach((item) => {
+              let id = item.id;
+              let card = document.createElement("div");
+              card.className = "card glass-card mb-3"; // Tambahkan margin
+              card.innerHTML = `
+                <p class="fs-5 mb-3 fst-italic">"${item.isi_motivasi}"</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex gap-2">
+                        <button id="btnLike-${id}" class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-heart"></i> ${item.jumlah_like || 0}
+                        </button>
+                        <button class="btn btn-sm btn-outline-primary" onclick="bukaKomentar(${id})">
+                            <i class="fa-regular fa-comment"></i> ${item.jumlah_komentar || 0}
+                        </button>
+                    </div>
+                </div>
+                <div id="listKomen-${id}" style="display:none;" class="mt-3 p-2 border-top"></div>
+            `;
+              container.appendChild(card);
+
+              // Pasang event listener
+              let btn = document.getElementById(`btnLike-${id}`);
+              if (btn) btn.onclick = () => prosesLike(id);
+            });
+          })
+          .catch((err) => {
+            container.innerHTML = "<p style='color:red;'>Gagal konek ke server. Cek link Ngrok atau koneksi!</p>";
+            console.error(err);
+          });
+      }
+
+      function prosesRegister() {
+        let nama = document.getElementById("regNama").value;
+        let email = document.getElementById("regEmail").value;
+        let password = document.getElementById("regPassword").value;
+
+        if (!nama || !email || !password) {
+          alert("Mohon isi semua kolom!");
+          return;
+        }
+
+        let fd = new FormData();
+        fd.append("nama", nama);
+        fd.append("email", email);
+        fd.append("password", password);
+
+        fetch(BASE_URL + "register.php", { method: "POST", body: fd })
+          .then((r) => r.json())
+          .then((data) => {
+            alert(data.message);
+            if (data.status === "success") {
+              document.getElementById("regNama").value = "";
+              document.getElementById("regEmail").value = "";
+              document.getElementById("regPassword").value = "";
+            }
+          })
+          .catch((err) => console.error("Error:", err));
+      }
+
+      async function bukaKomentar(id) {
+        let listArea = document.getElementById(`listKomen-${id}`);
+        if (listArea.style.display === "none") {
+          let res = await fetch(BASE_URL + "get_komentar.php?id_motivasi=" + id).then((r) => r.json());
+          let htmlKomen = res.data?.map((k) => `<div class="mt-2 p-2 bg-white border rounded"><small><b>User:</b> ${k.isi_komentar}</small></div>`).join("") || "<p class='small text-muted'>Belum ada komentar.</p>";
+          listArea.innerHTML = `<h6>Komentar:</h6>${htmlKomen}
+                    <textarea id="inputKomen-${id}" class="form-control form-control-sm mt-2" placeholder="Tulis komentar..."></textarea>
+                    <button onclick="kirimKomentar(${id})" class="btn btn-sm btn-primary mt-1">Kirim</button>`;
+          listArea.style.display = "block";
+        } else {
+          listArea.style.display = "none";
+        }
+      }
+
+      async function kirimKomentar(id_motivasi) {
+        let isi = document.getElementById(`inputKomen-${id_motivasi}`).value;
+        let id_user = sessionUser.iduser;
+        if (!id_user) return alert("Login dulu!");
+        let fd = new FormData();
+        fd.append("id_motivasi", id_motivasi);
+        fd.append("id_user", id_user);
+        fd.append("isi_komentar", isi);
+        let res = await fetch(BASE_URL + "tambah_komentar.php", { method: "POST", body: fd }).then((r) => r.json());
+        if (res.status === "success") {
+          alert("Berhasil!");
+          loadTimeline();
+        } else {
+          alert(res.message);
+        }
+      }
+
+      function prosesKirimMotivasi() {
+        let el = document.getElementById("isiMotivasi");
+        if (!el) {
+          console.error("Elemen isiMotivasi tidak ditemukan di HTML!");
+          alert("Error: Form tidak ditemukan.");
+          return;
+        }
+
+        let id_user = localStorage.getItem("id_user");
+        let isi = el.value;
+
+        if (!id_user) return alert("Login dulu!");
+        if (!isi) return alert("Isi motivasinya dulu!");
+
+        let fd = new FormData();
+        fd.append("id_user", id_user);
+        fd.append("isi_motivasi", isi);
+
+        fetch(BASE_URL + "tambah_motivasi.php", { method: "POST", body: fd })
+          .then((r) => r.json())
+          .then((res) => {
+            if (res.status === "success") {
+              alert("Motivasi terbit!");
+              el.value = ""; // Gunakan variabel el
+              loadTimeline();
+            } else {
+              alert("Gagal Publish: " + res.message);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            alert("Gagal terhubung ke server. Cek koneksi Ngrok!");
+          });
+      }
+      function prosesLogin() {
+        let fd = new FormData();
+        fd.append("email", document.getElementById("loginEmail").value);
+        fd.append("password", document.getElementById("loginPassword").value);
+
+        fetch(BASE_URL + "login.php", { method: "POST", body: fd })
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.status === "success") {
+              // PENTING: Pastikan variabel 'iduser' sesuai dengan respon PHP kamu
+              // Cek apakah di database PHP kamu namanya 'iduser' atau 'id_user'
+              let id = data.data.iduser;
+
+              localStorage.setItem("id_user", id); // Simpan ke HP
+              sessionUser.iduser = id; // Simpan ke memori aplikasi
+
+              alert("Login Berhasil!");
+              document.getElementById("authBox").classList.add("d-none");
+              document.getElementById("postBox").classList.remove("d-none");
+              loadTimeline();
+            } else {
+              alert("Login Gagal: " + data.message);
+            }
+          });
+      }
+      function prosesLogout() {
+        // 1. Reset ID User di memori
+        sessionUser.iduser = null;
+
+        // 2. Hapus data dari localStorage jika kamu menyimpannya di sana
+        localStorage.removeItem("id_user");
+
+        console.log("Logout berhasil, ID User di-reset.");
+
+        // 3. Ubah tampilan sidebar
+        // Pastikan ID elemennya sesuai dengan HTML kamu
+        let authBox = document.getElementById("authBox");
+        let postBox = document.getElementById("postBox");
+
+        if (authBox && postBox) {
+          authBox.classList.remove("d-none");
+          postBox.classList.add("d-none");
+        }
+
+        // 4. Bersihkan input
+        document.getElementById("loginEmail").value = "";
+        document.getElementById("loginPassword").value = "";
+        document.getElementById("isiMotivasi").value = "";
+
+        // 5. Refresh timeline
+        loadTimeline();
+
+        alert("Anda telah berhasil logout!");
+      }
+
+      function prosesLike(id) {
+        let id_user = localStorage.getItem("id_user");
+
+        // Validasi super ketat
+        if (!id_user || id_user === "null" || id_user === undefined) {
+          alert("ID User tidak ditemukan. Silakan Login ulang.");
+          return;
+        }
+
+        let fd = new FormData();
+        fd.append("id_motivasi", id);
+        fd.append("id_user", id_user); // Pastikan ini dikirim
+
+        fetch(BASE_URL + "tambah_like.php", {
+          method: "POST",
+          body: fd,
+        })
+          .then((r) => r.json())
+          .then((res) => {
+            if (res.status === "success") {
+              alert("Like berhasil!");
+              loadTimeline();
+            } else {
+              // Kita munculkan pesan error dari PHP di sini
+              alert("Server error: " + res.message);
+            }
+          })
+          .catch((err) => {
+            // Jika masuk ke sini, berarti URL BASE_URL salah atau server mati
+            alert("Gagal terhubung! Periksa koneksi Ngrok: " + BASE_URL);
+          });
+      }
+      // Fungsi lainnya tetap ada di sini (prosesRegister, prosesKirimMotivasi, prosesLogout, prosesLike)...
+      window.onload = function () {
+        let id_user = localStorage.getItem("id_user");
+        if (id_user) {
+          document.getElementById("authBox").classList.add("d-none");
+          document.getElementById("postBox").classList.remove("d-none");
+        }
+        loadTimeline();
+      };
+    </script>
+  </body>
+</html>
