@@ -1,0 +1,76 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* BACKGROUND */
+.theme-bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/laptopku.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* BOX GLASS */
+.theme-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-radius: 15px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  color: #000 !important;
+}
+
+/* TITLE BOX */
+.theme-card .box-title {
+  color: #000 !important;
+  font-weight: bold;
+}
+
+/* SIDEBAR */
+.sidebar-menu li a.theme-menu {
+  color: white !important;
+  border-radius: 8px;
+  margin: 4px;
+  transition: 0.3s;
+  padding: 10px;
+  display: block;
+}
+
+.sidebar-menu li a.theme-menu:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  padding-left: 18px;
+}
+
+.sidebar-menu li.active a.theme-menu {
+  background: linear-gradient(135deg, #1e3c72, #2a5298) !important;
+  color: white !important;
+  border-radius: 8px;
+}
+
+/* TABLE */
+.theme-card .table {
+  color: #000 !important;
+  background: transparent !important;
+}
+
+.theme-card .table th {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #000 !important;
+}
+
+.theme-card .table td {
+  color: #000 !important;
+}
+
+.theme-card .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+.theme-card .table-striped > tbody > tr:nth-of-type(even) {
+  background-color: transparent !important;
+}
