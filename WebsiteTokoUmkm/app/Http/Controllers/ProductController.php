@@ -8,11 +8,12 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // Data Produk Katalog Catering & UMKM Dandi langsung dikunci di memori agar anti-error database
+        // Data Produk Katalog Catering & UMKM Dandi langsung dikunci di memori dengan description lengkap
         $products = [
             (object)[
                 'id' => 1,
                 'name' => 'Paket Bento Box Premium',
+                'description' => 'Paket nasi bento lengkap dengan ayam teriyaki, salad segar, dan gorengan khas Jepang.',
                 'price' => 35000,
                 'image' => 'bento.jpg',
                 'category_name' => 'Nasi Kotak'
@@ -20,6 +21,7 @@ class ProductController extends Controller
             (object)[
                 'id' => 2,
                 'name' => 'Nasi Tumpeng Mini Syukuran',
+                'description' => 'Nasi tumpeng mini porsi personal dengan lauk ayam bumbu bali, mi goreng, perkedel, dan sambal.',
                 'price' => 25000,
                 'image' => 'tumpeng.jpg',
                 'category_name' => 'Prasmanan'
@@ -27,6 +29,7 @@ class ProductController extends Controller
             (object)[
                 'id' => 3,
                 'name' => 'Snack Box Acara Rapat',
+                'description' => 'Kotak kue premium isi 3 macam kue (asin & manis) ditambah air mineral gelas untuk rapat.',
                 'price' => 15000,
                 'image' => 'snack.jpg',
                 'category_name' => 'Kue & Snack'
