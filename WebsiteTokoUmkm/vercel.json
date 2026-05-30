@@ -16,6 +16,7 @@
   "env": {
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie",
+    "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_ROUTES_CACHE": "/tmp/routes.php",
     "DB_CONNECTION": "sqlite",
