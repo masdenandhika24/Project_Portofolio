@@ -19,6 +19,6 @@
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_ROUTES_CACHE": "/tmp/routes.php",
     "DB_CONNECTION": "sqlite",
-    "DB_DATABASE": "/tmp/database.sqlite"
+    "DB_DATABASE": "database.sqlite"
   }
 }
