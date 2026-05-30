@@ -30,7 +30,7 @@
     <img src="{{ $product->image }}" alt="{{ $product->name }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px 6px 0 0;">
 @else
     <!-- Jika data baru menggunakan file foto asli hasil upload -->
-    <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px 6px 0 0;">
+    <img src="{{ $product->image }}" ...> }}" alt="{{ $product->name }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px 6px 0 0;">
 @endif
                 <div class="card-body">
                     <span class="badge">{{ $product->category_name }}</span>
