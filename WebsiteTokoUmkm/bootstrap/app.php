@@ -3,19 +3,19 @@
 /*
 
 |--------------------------------------------------------------------------
-| Custom Application untuk Vercel (Menjebol Error Read-Only Cache)
+| Custom Application untuk Vercel (Perbaikan Jalur Cache)
 |--------------------------------------------------------------------------
 */
 class VercelApplication extends Illuminate\Foundation\Application {
     public function bootstrapPath($path = '') {
         if (isset($_ENV['VERCEL_URL']) || isset($_SERVER['VERCEL_URL'])) {
-            return '/tmp/bootstrap/cache'.($path ? DIRECTORY_SEPARATOR.$path : '');
+            return '/tmp/bootstrap'.($path ? DIRECTORY_SEPARATOR.$path : '');
         }
         return parent::bootstrapPath($path);
     }
 }
 
-// Pastikan folder memori sementara Vercel terbuat otomatis
+// Membuat folder cache yang benar di memori sementara
 if (isset($_ENV['VERCEL_URL']) || isset($_SERVER['VERCEL_URL'])) {
     if (!is_dir('/tmp/bootstrap/cache')) {
         mkdir('/tmp/bootstrap/cache', 0755, true);
