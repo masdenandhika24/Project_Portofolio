@@ -1,5 +1,12 @@
 <?php
 
+// Tambahkan 3 baris ini di paling atas file public/index.php Anda:
+if (!is_dir('/tmp/storage/framework/views')) {
+    mkdir('/tmp/storage/framework/views', 0755, true);
+}
+
+// ... biarkan kode bawaan public/index.php Laravel Anda tetap di bawahnya ...
+
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
