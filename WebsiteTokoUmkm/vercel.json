@@ -17,6 +17,12 @@
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie",
     "APP_CONFIG_CACHE": "/tmp/config.php",
-    "APP_ROUTES_CACHE": "/tmp/routes.php"
+    "APP_ROUTES_CACHE": "/tmp/routes.php",
+    "DB_CONNECTION": "mysql",
+    "DB_HOST": "://infinityfree.com",
+    "DB_PORT": "3306",
+    "DB_DATABASE": "if0_42055189_catering",
+    "DB_USERNAME": "if0_42055189",
+    "DB_PASSWORD": "vSDh1F7L28"
   }
 }
