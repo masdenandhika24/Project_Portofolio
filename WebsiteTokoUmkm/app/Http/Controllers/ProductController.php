@@ -8,14 +8,14 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // Data Produk Katalog Catering & UMKM Dandi langsung dikunci di memori dengan description lengkap
+        // Data Produk Katalog dengan LINK GAMBAR ONLINE asli agar langsung muncul di Vercel
         $products = [
             (object)[
                 'id' => 1,
                 'name' => 'Paket Bento Box Premium',
                 'description' => 'Paket nasi bento lengkap dengan ayam teriyaki, salad segar, dan gorengan khas Jepang.',
                 'price' => 35000,
-                'image' => 'bento.jpg',
+                'image' => 'https://unsplash.com', // Link gambar bento sehat
                 'category_name' => 'Nasi Kotak'
             ],
             (object)[
@@ -23,7 +23,7 @@ class ProductController extends Controller
                 'name' => 'Nasi Tumpeng Mini Syukuran',
                 'description' => 'Nasi tumpeng mini porsi personal dengan lauk ayam bumbu bali, mi goreng, perkedel, dan sambal.',
                 'price' => 25000,
-                'image' => 'tumpeng.jpg',
+                'image' => 'https://unsplash.com', // Link gambar nasi kuning/tumpeng
                 'category_name' => 'Prasmanan'
             ],
             (object)[
@@ -31,12 +31,11 @@ class ProductController extends Controller
                 'name' => 'Snack Box Acara Rapat',
                 'description' => 'Kotak kue premium isi 3 macam kue (asin & manis) ditambah air mineral gelas untuk rapat.',
                 'price' => 15000,
-                'image' => 'snack.jpg',
+                'image' => 'https://unsplash.com', // Link gambar kue/snack manis
                 'category_name' => 'Kue & Snack'
             ]
         ];
 
-        // Langsung kirim data ke halaman utama katalog Anda tanpa menyentuh database yang terkunci
         return view('welcome', compact('products'));
     }
 }
