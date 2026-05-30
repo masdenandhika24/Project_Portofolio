@@ -15,13 +15,15 @@ class VercelApplication extends Illuminate\Foundation\Application {
     }
 }
 
-// Membuat folder cache yang benar di memori sementara
+// Membuat folder cache dan file database otomatis di memori sementara Vercel
 if (isset($_ENV['VERCEL_URL']) || isset($_SERVER['VERCEL_URL'])) {
     if (!is_dir('/tmp/bootstrap/cache')) {
         mkdir('/tmp/bootstrap/cache', 0755, true);
     }
+    if (!file_exists('/tmp/database.sqlite')) {
+        touch('/tmp/database.sqlite');
+    }
 }
-
 $app = new VercelApplication(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
