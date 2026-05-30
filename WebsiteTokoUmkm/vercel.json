@@ -12,5 +12,8 @@
       "src": "/(.*)",
       "dest": "public/index.php"
     }
-  ]
+  ],
+  "env": {
+    "LOG_CHANNEL": "stderr"
+  }
 }
