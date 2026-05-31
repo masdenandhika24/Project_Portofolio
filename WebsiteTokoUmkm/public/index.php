@@ -1,31 +1,14 @@
 <?php
 
-// Trik Pamungkas: Jika berjalan di Vercel, paksa gunakan database TiDB Cloud
+// Trik Pamungkas: Paksa alihkan view compiled path ke /tmp agar bebas dari Read-Only Vercel
 if (isset($_ENV['VERCEL_JOB_ID']) || isset($_SERVER['VERCEL_URL'])) {
-    $_ENV['DB_CONNECTION'] = 'mysql';
-    $_SERVER['DB_CONNECTION'] = 'mysql';
+    $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
+    $_SERVER['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
     
-    $_ENV['DB_HOST'] = '47.74.225.19';
-    $_SERVER['DB_HOST'] = '47.74.225.19';
-    
-    $_ENV['DB_PORT'] = '4000';
-    $_SERVER['DB_PORT'] = '4000';
-    
-    $_ENV['DB_DATABASE'] = 'sys';
-    $_SERVER['DB_DATABASE'] = 'sys';
-    
-    $_ENV['DB_USERNAME'] = 'iM3uhC7u7DzZe2I.root';
-    $_SERVER['DB_USERNAME'] = 'iM3uhC7u7DzZe2I.root';
-    
-    $_ENV['DB_PASSWORD'] = 'i43Kby9zcmJv3aJr';
-    $_SERVER['DB_PASSWORD'] = 'i43Kby9zcmJv3aJr';
-    
-    $_ENV['MYSQL_ATTR_SSL_CA'] = 'true';
-    $_SERVER['MYSQL_ATTR_SSL_CA'] = 'true';
-    
-    // Tetap paksa session menggunakan cookie agar tidak Read-Only
-    $_ENV['SESSION_DRIVER'] = 'cookie';
-    $_SERVER['SESSION_DRIVER'] = 'cookie';
+    // Pastikan foldernya terbuat otomatis
+    if (!is_dir('/tmp/storage/framework/views')) {
+        mkdir('/tmp/storage/framework/views', 0755, true);
+    }
 }
 
 use Illuminate\Contracts\Http\Kernel;
@@ -61,6 +44,11 @@ require __DIR__.'/../vendor/autoload.php';
 */
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
+
+// Paksa timpa config view secara langsung sesaat setelah app dimuat
+if (isset($_ENV['VERCEL_JOB_ID']) || isset($_SERVER['VERCEL_URL'])) {
+    config(['view.compiled' => '/tmp/storage/framework/views']);
+}
 
 $kernel = $app->make(Kernel::class);
 
