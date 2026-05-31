@@ -59,7 +59,7 @@ return [
         // KONEKSI YANG DIPAKSA KUNCI KHUSUS UNTUK SERVER VERCEL (TIDB CLOUD)
         'mysql_vercel' => [
             'driver' => 'mysql',
-            'host' => '47.74.225.19',
+            'host' => 'gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com',
             'port' => '4000',
             'database' => 'sys',
             'username' => 'iM3uhC7u7DzZe2I.root',
