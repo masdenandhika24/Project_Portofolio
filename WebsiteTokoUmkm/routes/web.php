@@ -145,3 +145,61 @@ Route::get('/', function() {
 
     return response($html);
 });
+
+// ===================================================
+// KODE TAMBAHAN: RUTE HALAMAN DASHBOARD ADMIN
+// ===================================================
+Route::get('/admin', function() {
+    $html = '
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Dashboard - Dandi Catering</title>
+        <link href="https://jsdelivr.net" rel="stylesheet">
+        <style>
+            body { background-color: #f8f9fa; font-family: "Segoe UI", sans-serif; }
+            .sidebar { background-color: #212529; color: white; min-height: 100vh; padding: 20px; }
+            .sidebar a { color: #fff; text-decoration: none; display: block; padding: 10px; border-radius: 5px; }
+            .sidebar a:hover { background-color: #343a40; }
+            .main-content { padding: 30px; }
+            .card-counter { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar Navigasi -->
+                <div class="col-md-3 col-lg-2 sidebar">
+                    <h4 class="mb-4">🍱 Admin Dandi</h4>
+                    <hr>
+                    <a href="#" class="mb-2">📊 Dashboard</a>
+                    <a href="#" class="mb-2">🍔 Kelola Produk</a>
+                    <a href="#" class="mb-2">📈 Laporan Pesanan</a>
+                    <a href="/" target="_blank" class="mt-5 btn btn-sm btn-success text-white w-100">👁 Lihat Toko</a>
+                </div>
+                
+                <!-- Konten Utama Dashboard -->
+                <div class="col-md-9 col-lg-10 main-content">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Dashboard Ringkasan</h1>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card-counter text-center">
+                                <h3 class="text-primary">5</h3>
+                                <p class="text-muted mb-0">Total Produk Katalog</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-counter text-center">
+                                <h3 class="text-success">2</h3>
+                                <p class="text-muted mb-0">Kategori Aktif</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-counter text-center">
+                                <h3 class="text-warning">Hub WA</h3>
+                                <p class="text-muted mb-0">Sistem Integrasi</p>
