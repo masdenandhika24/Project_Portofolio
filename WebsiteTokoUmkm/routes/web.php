@@ -116,7 +116,7 @@ Route::get('/', function() {
                     $pesan = "Halo Dandi Catering, saya mau pesan:\n\n"
                            . "* " . $product->name . " (Rp " . number_format($product->price, 0, ',', '.') . ")*\n\n"
                            . "Mohon info detail pembayarannya ya Kak. Terima kasih.";
-                    $url_wa = "https://wa.me" . $nomor_wa . "?text=" . urlencode($pesan);
+                    $url_wa = "https://wa.me/" . $nomor_wa . "?text=" . urlencode($pesan);
                     
                     $badgeClass = ($product->category_name == 'Minuman Segar') ? 'badge badge-minuman' : 'badge';
 
