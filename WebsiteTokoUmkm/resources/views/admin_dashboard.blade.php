@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - Kelola Produk</title>
     <!-- Membaca file CSS lokal yang sama agar offline dan rapi -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
         .form-box { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 30px; border: 1px solid #eee; }
         .form-group { margin-bottom: 15px; }
@@ -21,20 +21,23 @@
 </head>
 <body>
 
-    <nav>
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            <a href="#" class="brand">⚙️ Dashboard Admin Katering</a>
-            <!-- Tombol Logout Merah -->
-<a href="{{ route('logout') }}" 
-   onclick="event.preventDefault(); document.getElementById('logout-form-dash').submit();" 
-   style="background-color: #dc3545; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 13px;">
-   Keluar / Logout
-</a>
-
-<form id="logout-form-dash" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>
-            <a href="{{ url('/') }}" target="_blank" style="text-decoration: none; font-weight: bold; color: #0d6efd;">👁️ Lihat Katalog Live</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center py-2">
+            <a href="#" class="brand text-decoration-none text-dark fs-4 fw-bold">⚙️ Dashboard Admin Katering</a>
+            
+            <div class="d-flex align-items-center gap-3">
+                <a href="{{ url('/') }}" target="_blank" style="text-decoration: none; font-weight: bold; color: #0d6efd;">👁️ Lihat Katalog Live</a>
+                
+                <!-- Tombol Logout Merah -->
+                <a href="{{ route('logout') }}" 
+                   onclick="event.preventDefault(); document.getElementById('logout-form-dash').submit();" 
+                   class="btn btn-sm btn-danger text-white px-3 fw-bold">
+                   Keluar / Logout
+                </a>
+                <form id="logout-form-dash" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
         </div>
     </nav>
 
@@ -49,7 +52,7 @@
             <h3 style="margin-top:0; margin-bottom:20px; font-weight:bold;">➕ Tambah Menu Jualan Baru</h3>
             
             <!-- Formulir input data terhubung ke fungsi store di Laravel -->
-            <form action="{{ url('/admin/tambah') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/tambah') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label>Nama Produk / Makanan</label>
@@ -58,10 +61,9 @@
 
                 <div class="form-group">
                     <label>Kategori</label>
-                    <select name="category_id" required>
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                        @endforeach
+                    <select name="category_name" required>
+                        <option value="Makanan Berat">Makanan Berat</option>
+                        <option value="Minuman Segar">Minuman Segar</option>
                     </select>
                 </div>
 
@@ -69,15 +71,10 @@
                     <label>Harga (Rp)</label>
                     <input type="number" name="price" placeholder="Contoh: 15000" required>
                 </div>
-
-                <div class="form-group">
-                    <label>Stok Awal</label>
-                    <input type="number" name="stock" placeholder="Contoh: 30" required>
-                </div>
                 
                 <div class="form-group">
-                    <label>Foto Produk (Format: JPG, JPEG, PNG)</label>
-                    <input type="file" name="image" required>
+                    <label>URL / Teks Nama Gambar</label>
+                    <input type="text" name="image" value="https://unsplash.com" placeholder="Contoh: https://unsplash.com atau /images/jeruk.jpg" required>
                 </div>
 
                 <div class="form-group">
@@ -98,7 +95,7 @@
                         <th>Nama Menu</th>
                         <th>Kategori</th>
                         <th>Harga</th>
-                        <th>Stok</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -106,9 +103,9 @@
                     @foreach($products as $prod)
                     <tr>
                         <td style="font-weight: bold;">{{ $prod->name }}</td>
-                        <td><span class="badge">{{ $prod->category_name }}</span></td>
+                        <td><span class="badge bg-secondary">{{ $prod->category_name }}</span></td>
                         <td style="color: #dc3545; font-weight: bold;">Rp {{ number_format($prod->price, 0, ',', '.') }}</td>
-                        <td>{{ $prod->stock }} pcs</td>
+                        <td><span class="text-success fw-bold">● Aktif</span></td>
                         <td>
                             <!-- Tombol Hapus Terhubung ke fungsi destroy di Laravel -->
                             <form action="{{ url('/admin/hapus/'.$prod->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus menu ini?')">
