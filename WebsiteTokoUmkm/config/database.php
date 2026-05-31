@@ -56,7 +56,7 @@ return [
             ]) : [],
         ],
 
-        // KONEKSI YANG DIPAKSA KUNCI KHUSUS UNTUK SERVER VERCEL (TIDB CLOUD)
+        // KONEKSI YANG DIPAKSA KUNCI KHUSUS UNTUK SERVER VERCEL (TIDB CLOUD ALICLOUD)
         'mysql_vercel' => [
             'driver' => 'mysql',
             'host' => 'gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com',
@@ -71,6 +71,7 @@ return [
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? [
                 PDO::MYSQL_ATTR_SSL_CA => true,
+                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false, // Bypass validasi sertifikat SSL lokal Vercel
                 PDO::ATTR_TIMEOUT => 30,
             ] : [],
         ],
@@ -97,17 +98,14 @@ return [
     | Migration Repository Table
 
     |--------------------------------------------------------------------------
-    |
     */
 
     'migrations' => 'migrations',
 
     /*
-
     |--------------------------------------------------------------------------
     | Redis Databases
     |--------------------------------------------------------------------------
-    |
     */
 
     'redis' => [
