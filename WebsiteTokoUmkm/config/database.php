@@ -61,7 +61,7 @@ return [
             'driver' => 'mysql',
             'host' => 'gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com',
             'port' => '4000',
-            'database' => 'sys',
+            'database' => 'db_toko_umkm',
             'username' => 'iM3uhC7u7DzZe2I.root',
             'password' => 'i43Kby9zcmJv3aJr',
             'charset' => 'utf8mb4',
