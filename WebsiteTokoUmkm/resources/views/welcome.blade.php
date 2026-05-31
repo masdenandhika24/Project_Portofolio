@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dandi Catering & UMKM</title>
     <!-- Membaca file CSS lokal di dalam laptop tanpa butuh internet -->
-     <link href="https://jsdelivr.net"rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body>
 
