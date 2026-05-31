@@ -3,32 +3,50 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function() {
-    // DATA ASLI DARI LAPTOP LOKAL KAMU (Sudah disamakan 100%)
+    // Ambil domain dinamis Vercel saat ini untuk membaca folder public/images
+    $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
+
+    // SUSUNAN BARIS 5 DATA PRODUK KATALOG JUALAN KAMU
     $products = [
         (object)[
             'name' => 'Nasi Kotak Ayam Bakar',
             'category_name' => 'Makanan Berat',
             'description' => 'Nasi kotak lengkap dengan Ayam Bakar bumbu madu, tahu, tempe, lalapan, dan sambal terasi.',
             'price' => 25000,
-            'image' => 'https://unsplash.com' // Foto nasi kotak lezat
+            'image' => 'https://unsplash.com'
         ],
         (object)[
             'name' => 'Paket Prasmanan Mewah',
             'category_name' => 'Makanan Berat',
             'description' => 'Paket makanan prasmanan untuk acara pernikahan/pesta termasuk nasi, olahan daging sapi, sup, dan pelengkap.',
             'price' => 45000,
-            'image' => 'https://unsplash.com' // Foto prasmanan mewah
+            'image' => 'https://unsplash.com'
+        ],
+        (object)[
+            'name' => 'Nasi Goreng Gila',
+            'category_name' => 'Makanan Berat',
+            'description' => 'Nasi goreng bumbu kencur pedas dengan topping melimpah bakso, sosis, telur ayam, dan kerupuk renyah.',
+            'price' => 20000,
+            'image' => 'https://unsplash.com'
         ],
         (object)[
             'name' => 'Es Teh Manis Jumbo',
             'category_name' => 'Minuman Segar',
             'description' => 'Es teh manis segar berukuran besar, cocok untuk menemani hidangan katering.',
             'price' => 5000,
-            'image' => 'https://unsplash.com' // Foto es teh segar
+            'image' => 'https://unsplash.com'
+        ],
+        (object)[
+            'name' => 'Es Jeruk Peras',
+            'category_name' => 'Minuman Segar',
+            'description' => 'Minuman es jeruk murni perasan asli buah segar, kaya vitamin C, manis dan menghilangkan dahaga.',
+            'price' => 7000,
+            // KHUSUS MENU INI MEMANGGIL FILE JERUK.JPG DARI FOLDER IMAGES LOKAL KAMU
+            'image' => $baseUrl . '/images/jeruk.jpg' 
         ]
     ];
 
-    // Menyusun teks HTML dan memperbaiki Link CDN CSS biar gemboknya jebol dan rapi
+    // Menyusun teks HTML dan CSS internal agar 100% sama dengan tampilan laptop lokalanmu
     $html = '
     <!DOCTYPE html>
     <html lang="id">
@@ -36,12 +54,8 @@ Route::get('/', function() {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dandi Catering & UMKM</title>
-        
-        <!-- LINK BOOTSTRAP CDN YANG BENAR (MEMPERBAIKI LINK REKSA SEBELUMNYA) -->
         <link href="https://jsdelivr.net" rel="stylesheet">
-        
         <style>
-            /* CSS Kustom Penyelamat Gaya Layout Lokal */
             body { background-color: #f8f9fa; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; }
             nav { background-color: #ffffff; padding: 15px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
             .brand { font-size: 24px; font-weight: bold; color: #333; text-decoration: none; }
@@ -58,7 +72,6 @@ Route::get('/', function() {
                 text-align: center; 
             }
             
-            /* MEMAKSA GRID BERJEJER KESAMPING TIGA KOTAK SEPERTI DI LOKAL */
             .grid { 
                 display: grid; 
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -71,7 +84,6 @@ Route::get('/', function() {
             .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
             
             .badge { background-color: #0d6efd; color: white; padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block; margin-bottom: 10px; width: fit-content; font-weight: bold; }
-            /* Khusus kategori minuman warna hijau segar */
             .badge-minuman { background-color: #198754; }
             
             .card-title { font-size: 20px; font-weight: bold; color: #222; margin-bottom: 10px; }
@@ -104,9 +116,8 @@ Route::get('/', function() {
                     $pesan = "Halo Dandi Catering, saya mau pesan:\n\n"
                            . "* " . $product->name . " (Rp " . number_format($product->price, 0, ',', '.') . ")*\n\n"
                            . "Mohon info detail pembayarannya ya Kak. Terima kasih.";
-                    $url_wa = "https://wa.me/" . $nomor_wa . "?text=" . urlencode($pesan);
+                    $url_wa = "https://wa.me" . $nomor_wa . "?text=" . urlencode($pesan);
                     
-                    // Cek warna badge berdasarkan nama kategori
                     $badgeClass = ($product->category_name == 'Minuman Segar') ? 'badge badge-minuman' : 'badge';
 
                     $html .= '
