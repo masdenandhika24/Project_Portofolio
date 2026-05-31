@@ -50,23 +50,23 @@ $app->singleton(
 /*
 
 |--------------------------------------------------------------------------
-| Vercel Custom Patches (Trik Pemindah Folder Session Fisik)
+| Vercel Custom Patches (Bypass Mutlak Read-Only View)
 |--------------------------------------------------------------------------
 */
 if (isset($_ENV['VERCEL_JOB_ID']) || isset($_SERVER['VERCEL_URL'])) {
-    // 1. Pindahkan folder penyimpanan utama Laravel ke /tmp
+    // 1. Alihkan semua folder storage log dan session utama ke /tmp
     $app->useStoragePath('/tmp/storage');
 
-    // 2. Paksa buat folder sessions fisik di dalam /tmp sebelum sistem membaca session
-    if (!is_dir('/tmp/storage/framework/sessions')) {
-        mkdir('/tmp/storage/framework/sessions', 0755, true);
+    // 2. Buat folder views secara fisik di dalam /tmp sebelum dibaca sistem
+    if (!is_dir('/tmp/storage/framework/views')) {
+        mkdir('/tmp/storage/framework/views', 0755, true);
     }
 
-    // 3. Cadangan jika sistem masih keras kepala membaca file session
+    // 3. PAKSA sistem konfigurasi Laravel mengalihkan view.compiled ke /tmp (Bypass Hard Cache Vercel)
     $app->booting(function () {
         config([
-            'session.driver' => 'file',
-            'session.files' => '/tmp/storage/framework/sessions'
+            'session.driver' => 'cookie',
+            'view.compiled' => '/tmp/storage/framework/views'
         ]);
     });
 }
