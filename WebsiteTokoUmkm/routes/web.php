@@ -17,10 +17,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route darurat untuk membersihkan cache konfigurasi di Vercel
+// Route darurat untuk membersihkan cache konfigurasi dan MEMBUAT TABEL di Vercel
 Route::get('/clear-vercel', function() {
     Artisan::call('config:clear');
+    Artisan::call('migrate --force'); // Memaksa pembuatan tabel database langsung di TiDB Cloud
     Artisan::call('cache:clear');
     Artisan::call('view:clear');
-    return "Semua cache di Vercel sudah bersih! Silakan kembali ke halaman utama.";
+    return "Semua cache bersih dan tabel database berhasil dibuat di TiDB Cloud! Silakan kembali ke halaman utama.";
 });
