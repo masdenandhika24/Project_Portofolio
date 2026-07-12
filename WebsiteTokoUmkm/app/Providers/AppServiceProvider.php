@@ -3,34 +3,26 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL; // <-- 1. Pastikan baris ini ada
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
-        // Jika berjalan di server Vercel, pindahkan folder storage ke /tmp
-        if (isset($_ENV['VERCEL_JOB_ID']) || isset($_SERVER['VERCEL_URL'])) {
-            $this->app->useStoragePath('/tmp/storage');
-            
-            // Buat folder yang dibutuhkan jika belum ada
-            if (!is_dir('/tmp/storage/framework/views')) {
-                mkdir('/tmp/storage/framework/views', 0755, true);
-            }
-        }
+        //
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //
+        // 2. Tambahkan kode ini agar semua aset otomatis menggunakan https lewat ngrok
+        if (env('APP_ENV') !== 'local' || str_contains(request()->url(), 'ngrok-free.dev')) {
+            URL::forceScheme('https');
+        }
     }
 }
